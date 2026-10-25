@@ -1,0 +1,16 @@
+name: CI
+on:
+push:
+branches: [main]
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Build Docker image
+run: docker build -t my-site:${{ github.sha }} .
+- name: Smoke test
+run: |
+docker run -d -p 8080:80 --name web my-site:${{ github.sha }}
+sleep 3
+curl -f http://localhost:8080
