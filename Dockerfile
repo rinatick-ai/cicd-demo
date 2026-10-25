@@ -1,2 +1,2 @@
-FROM nginx-broken-image
-COPY index.html /usr/share/nginx/html/error.html
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
